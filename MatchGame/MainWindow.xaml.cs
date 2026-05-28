@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,6 +24,33 @@ namespace MatchGame
         public MainWindow()
         {
             InitializeComponent();
+
+            SetUpGame();
+        }
+
+        private void SetUpGame()
+        {
+            List<string> animalEmoji = new List<string>()
+            {
+                "🦀","🦀",
+                "🐚","🐚",
+                "🐋","🐋",
+                "🦈","🦈",
+                "🐟","🐟",
+                "🐬","🐬",
+                "🐡","🐡",
+                "🦑","🦑",
+            };
+            Random random = new Random();
+
+            foreach (TextBlock textblock in mainGrid.Children.OfType<TextBlock>())
+            {
+                int index = random.Next(animalEmoji.Count);
+                string nextEmoji = animalEmoji[index];
+                textblock.Text = nextEmoji;
+                animalEmoji.RemoveAt(index);
+            }
+
         }
     }
 }
